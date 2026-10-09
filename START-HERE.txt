@@ -1,0 +1,58 @@
+VENTRICON — FINAL BILINGUAL WEBSITE
+====================================
+
+This package contains the complete VENTRICON website source code.
+
+LANGUAGES
+---------
+English: http://localhost:3000/
+Bangla:  http://localhost:3000/bn
+
+REQUIREMENTS
+------------
+Node.js 20+ recommended.
+
+RUN
+---
+1. Extract this ZIP.
+2. Open Command Prompt inside the "ventricon-final" folder.
+3. Run:
+   npm install
+4. Start the website:
+   npm run dev
+5. Open:
+   http://localhost:3000
+
+VERIFY THE PROJECT
+------------------
+After npm install finishes, run:
+   npm run verify
+
+This runs TypeScript checking, ESLint and a production build.
+
+IMPORTANT
+---------
+- Do NOT run "npm audit fix --force" before testing the website.
+- Keep the terminal running while using npm run dev.
+- Stop the dev server with Ctrl+C.
+- The contact form is integration-ready. Configure .env.local for email/CRM/WhatsApp delivery when you are ready.
+
+PROJECT FEATURES
+----------------
+- Premium VENTRICON UI
+- Responsive desktop/tablet/mobile design
+- English + Bangla homepage
+- Language switching
+- Services
+- Solutions
+- Work / Portfolio
+- About
+- Contact form + validation
+- Contact API
+- SEO metadata
+- Open Graph
+- Sitemap
+- Robots
+- 404 page
+- Accessibility-focused interactions
+- Playwright end-to-end tests
