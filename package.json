@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    
+"deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+"preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview"
+
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
