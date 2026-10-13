@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 48" width="320" height="48" role="img" aria-label="VENTRICON">
+  <defs>
+    <linearGradient id="vc-mark-full" x1="4" y1="6" x2="36" y2="34" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="52%" stop-color="#C8CDD8"/>
+      <stop offset="100%" stop-color="#2457FF"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(0,4)">
+    <rect x="0.6" y="0.6" width="38.8" height="38.8" fill="none" stroke="#C8CDD8" stroke-opacity="0.28"/>
+    <path d="M8 10.5 L20 30.5 L32 10.5" fill="none" stroke="url(#vc-mark-full)" stroke-width="4.2" stroke-linejoin="miter"/>
+    <rect x="28.5" y="4.5" width="3" height="3" fill="#2457FF"/>
+  </g>
+  <text x="56" y="31" fill="#FFFFFF" font-family="Sora, Inter, Helvetica, Arial, sans-serif" font-size="19" font-weight="600" letter-spacing="4.6">VENTRICON</text>
+</svg>

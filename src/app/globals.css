@@ -1,0 +1,408 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   VENTRICON — Design tokens
+   Brand: Build. Grow. Transform.
+   ========================================================================== */
+
+@theme {
+  /* --- Surfaces (deep ink / midnight navy) --- */
+  --color-ink-950: #08090c;
+  --color-ink-900: #0a0c11;
+  --color-ink-850: #0d1424;
+  --color-ink-800: #111a2e;
+  --color-ink-750: #16213a;
+  --color-ink-700: #1d2b48;
+  --color-ink-600: #243653;
+  --color-ink-500: #33426750;
+
+  /* --- Primary brand: signal blue --- */
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #dbe3ff;
+  --color-brand-200: #c8d2ff;
+  --color-brand-300: #9ab0ff;
+  --color-brand-400: #4d7cff;
+  --color-brand-500: #2457ff;
+  --color-brand-600: #1b44d6;
+  --color-brand-700: #1740a8;
+  --color-brand-800: #173a86;
+  --color-brand-900: #17346b;
+
+  /* --- Accents --- */
+  --color-aqua-300: #7fa1ff;
+  --color-aqua-400: #4d7cff;
+  --color-aqua-500: #2457ff;
+  --color-grape-300: #9ab0ff;
+  --color-grape-400: #4d7cff;
+  --color-grape-500: #2457ff;
+  --color-pulse-400: #3ddc97;
+  --color-pulse-500: #16b97a;
+  --color-amber-accent: #f5a524;
+
+  /* --- Typography --- */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-sora), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+
+  /* --- Motion --- */
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-pulse-line: pulse-line 3.2s ease-in-out infinite;
+  --animate-spin-slow: spin 18s linear infinite;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-pop: pop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-line {
+  0% {
+    stroke-dashoffset: 140;
+    opacity: 0.35;
+  }
+  45% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: -140;
+    opacity: 0.35;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Accounts for the sticky header when jumping to #anchors */
+  scroll-padding-top: 6.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-ink-950);
+  color: #c7d2e0;
+  font-family: var(--font-sans);
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-brand-500);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-aqua-400);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: #f4f8ff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Firefox / WebKit scrollbar */
+@supports selector(::-webkit-scrollbar) {
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-ink-950);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1d2942;
+    border: 3px solid var(--color-ink-950);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2c3d61;
+  }
+}
+
+/* ==========================================================================
+   Brand utilities (plain CSS so they compose predictably with Tailwind)
+   ========================================================================== */
+
+.vc-gradient-text {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-aqua-300) 0%,
+    var(--color-brand-400) 42%,
+    var(--color-grape-400) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.vc-hairline {
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    rgba(139, 185, 255, 0.28) 22%,
+    rgba(139, 185, 255, 0.28) 78%,
+    transparent
+  );
+}
+
+/* Translucent surface for the sticky header and desktop dropdowns. Opaque
+   enough to stay legible even where backdrop-filter is unsupported. */
+.vc-glass {
+  background-color: rgba(6, 10, 18, 0.9);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+}
+
+/* Full-height mobile navigation sheet: fully opaque by design — a menu you
+   can't read over the page behind it is not a menu. */
+.vc-sheet {
+  background-color: var(--color-ink-950);
+}
+
+
+
+.vc-panel {
+  position: relative;
+  border: 1px solid rgba(200, 205, 216, 0.12);
+  background-image: linear-gradient(
+    160deg,
+    rgba(18, 28, 48, 0.9) 0%,
+    rgba(8, 12, 22, 0.86) 100%
+  );
+}
+
+.vc-panel-hover {
+  transition:
+    border-color 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+}
+
+.vc-panel-hover:hover {
+  border-color: rgba(77, 124, 255, 0.42);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.04) inset,
+    0 24px 60px -32px rgba(36, 87, 255, 0.42);
+}
+
+/* dotted / lined technical backdrop */
+.vc-grid {
+  background-image:
+    linear-gradient(to right, rgba(200, 205, 216, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(200, 205, 216, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.vc-dots {
+  background-image: radial-gradient(
+    rgba(200, 205, 216, 0.10) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+
+.vc-glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.vc-mask-fade-x {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+}
+
+.vc-skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(139, 185, 255, 0.07);
+}
+
+.vc-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    rgba(200, 205, 216, 0.10),
+    transparent
+  );
+  animation: var(--animate-shimmer);
+}
+
+.vc-pulse-path {
+  stroke-dasharray: 140;
+  animation: var(--animate-pulse-line);
+}
+
+.vc-prose {
+  color: #a9b8cc;
+  line-height: 1.75;
+}
+.vc-prose strong {
+  color: #e8eefb;
+  font-weight: 600;
+}
+.vc-prose a {
+  color: var(--color-brand-300);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.vc-prose h2 {
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+.vc-prose h3 {
+  font-size: 1.125rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+.vc-prose ul {
+  margin: 1rem 0;
+  padding-left: 1.1rem;
+  list-style: disc;
+}
+.vc-prose li {
+  margin-top: 0.4rem;
+}
+
+/* Reveal-on-scroll.
+   The hidden state is applied only when the root layout has confirmed JS is
+   available (`<html data-js="true">`), so a no-JS visitor sees every section. */
+[data-js="true"] .vc-reveal {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+[data-js="true"] .vc-reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-js="true"] .vc-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Screen-reader-only helper (matches Tailwind's sr-only, used in plain CSS spots) */
+.vc-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* VENTRICON premium visual layer — merged from the luxury redesign system. */
+.vc-premium-line { border-color: rgba(200,205,216,0.12); }
+.vc-premium-surface {
+  background: linear-gradient(180deg, rgba(22,33,58,.52) 0%, rgba(8,9,12,.72) 100%);
+  border: 1px solid rgba(200,205,216,.12);
+  box-shadow: 0 24px 70px -32px rgba(0,0,0,.9);
+  backdrop-filter: blur(14px);
+}
+.vc-premium-surface:hover { border-color: rgba(200,205,216,.22); }
+.vc-premium-heading { letter-spacing: -.045em; }
+.vc-premium-glow { box-shadow: 0 18px 50px -22px rgba(36,87,255,.42); }
