@@ -2,18 +2,20 @@
   "name": "ventricon-business-solutions",
   "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint",
-    "typecheck": "tsc --noEmit",
-    "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
-    "verify": "npm run typecheck && npm run lint && npm run build"
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview"
-  },
+  
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "eslint",
+  "typecheck": "tsc --noEmit",
+  "test:e2e": "playwright test",
+  "test:e2e:ui": "playwright test --ui",
+  "verify": "npm run typecheck && npm run lint && npm run build",
+  "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+  "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview"
+}
+
   "dependencies": {
     "next": "16.4.0",
     "react": "19.3.0",
